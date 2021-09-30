@@ -22,6 +22,7 @@ tmargin={4cm},bmargin = {3cm}]{geometry}
 \alphalph{\value{subfigure}}%
 }%
 \usepackage{booktabs}
+\usepackage[bottom]{footmisc}
 \usepackage{fancyhdr}
 
 \pagestyle{fancy}
@@ -113,8 +114,6 @@ tmargin={4cm},bmargin = {3cm}]{geometry}
     \hfill\break
     Ebenfalls möchte ich mich bei meinem Vorgesetzten Dr. Dmitri Topaj bedanken, der mir mit viel Geduld, Interesse und Hilfsbereitschaft zur Seite stand.
     \hfill\break
-    % Außerdem möchte ich Anna Fried für das Korrekturlesen meiner Masterarbeit danken.
-    % \hfill\break
     Abschließend möchte ich mich bei meiner Frau Qi Gao und meinen Eltern bedanken, die mir mein Studium durch ihre Unterstützung ermöglicht haben und stets ein offenes Ohr für mich hatten.
 
     \newpage
@@ -225,8 +224,8 @@ tmargin={4cm},bmargin = {3cm}]{geometry}
     \hfill\break
     Im Kapitel 2 unserer Arbeit wird die Kurzfassung für die Rough Path Theorie vorgestellt, die für das Grundverständnis dieser Arbeit dient. Für interessierte Leser sind die entsprechenden Stellen an vertiefende Literaturen verwiesen. Wir führen zunächst die Tensoralgebra und die notwendigen Operationen für das Polynom $l$ ein, denn die Signaturen sind Elemente aus der Tensoralgebra. Wir stellen auch vor, dass es zwischen der Basis von der Tensoralgebra $T(V^*)$ und dem Raum der Wörter einen Isomorphismus exisiert, welchen die Einführung von dem Polynom motiviert. Im Anschluss präsentieren wir den p-geometrischen Rough Path als den p-schwach geometrischen Rough Path in der abgeschlossenen Menge, worin die durch $\lfloor p \rfloor$ abgeschnittenen Signaturen von den stückweise glatten Pfaden liegen. Danach kommt das optimale Stoppen mit Rough Path, wo wir das Konzept und die wichtige Theoreme und Resultate aus \cite{bayer_optimal_2020} erläutern. Insbesondere gehen wir auf die Herleitung der Signatur Stoppzeit ein.
     Im Kapitel 3 erläutern wir die Kernidee von \cite{becker_deep_2019}, welche uns die Entwicklung der Hybridmethode motiviert hat. Dabei erläutern wir die Struktur der Stoppzeit, das Konzept mit der Stoppentscheidung sowie die Konvergenzanalyse für das tiefneuronale Netzwerk. Die Konzepte unserer beiden Methoden werden hier präsentiert und die Beschreibung für die numerische Implementierung werden ebenfalls erläutert.
-    Im Kapitel 4 diskutieren wir die numerische Resultate und den Vergleich zu \cite{bayer_optimal_2020} und \cite{becker_deep_2019}. Dabei nehmen wir das Resultat für die fraktionale Brownsche Bewegung aus \cite{becker_deep_2019} als Benchmark und verwenden das Konzept für die numerische Implementierung, welches die Relation zwischen dem Hurst Parameter $H$ und dem Erwartungswert $\mathbb{E}[Y_{\tau^*}]$ darstellt. Zusätzlich gehen wir auf die Rechenzeit mit verschiedenen Datengrößen ein. Wir werden sehen, dass die Signaturmethode deutlich schneller ist, aber auch eine deutlich schlechtere Qualität als die Hybridmethode hat.
-    Abschließend geben wir dem Leser einen Ausblick über die weitere Forschungsmöglichkeiten zu Optimalem Stoppen mit der Signaturmethode.
+    Im Kapitel 4 diskutieren wir die numerische Resultate und den Vergleich zu \cite{becker_deep_2019}. Dabei nehmen wir das darin berechnete Resultat für die fraktionale Brownsche Bewegung als Benchmark und verwenden das Konzept für die numerische Implementierung, welches die Relation zwischen dem Hurst Parameter $H$ und dem Erwartungswert $\mathbb{E}[Y_{\tau^*}]$ darstellt. Zusätzlich gehen wir auf die Rechenzeit mit verschiedenen Datengrößen ein. Wir werden sehen, dass die Signaturmethode deutlich schneller ist, aber auch eine deutlich schlechtere Qualität als die Hybridmethode hat.
+    Abschließend geben wir dem Leser einen Ausblick über die weitere Forschungsmöglichkeiten zu optimalem Stoppen mit der Signaturmethode.
     \newpage
 
     \section{Das optimale Stoppen mit Rough Path}\label{chapter: opt_stop_with_rough_path}
@@ -414,18 +413,6 @@ tmargin={4cm},bmargin = {3cm}]{geometry}
         \begin{align*}
           P(\langle l, a \rangle) = \langle P^{\shuffle}(l),a \rangle, \quad a \in G(V).
         \end{align*}
-        % \begin{itemize}
-        %   \item Man beachte, dass die Menge der Group-Like-Elements eine Teilmenge von $T((V))$ ist, die die Linearisierungseigenschaft $\langle l_1 \shuffle l_2,a \rangle = \langle l_1,a \rangle \langle l_2,a\rangle$ für $a \in T((V))$ und $l_1, l_2 \in T(V^*)$ erfüllt.
-        %   \item Für alle $g \in G(V)$ setzen wir das neutrale Element bzgl. der Operation $\otimes$ als $\pi_0(g) = 1$ und das inverse Element der Gruppe $(G(V),\otimes)$ ist gegeben durch
-        %   \begin{align*}
-        %     g^{-1}=\sum_{n\geq 0}(1-g)^{\otimes n}.
-        %   \end{align*}
-        %   \item Außerdem setzen wir $G^N(V):=\pi_{\leq N}(G(V))$. Diese Menge ist die frei nilpotente Gruppe der N-ten Ordnung mit der geschnittenen Multiplikation $a \otimes_{G^N(V)} b := \pi_N(a\otimes b)$ für alle $a,b \in G^N(V)$.
-        %   \item Für jedes Polynom $P$ können wir schreiben:
-        %   \begin{align*}
-        %     P(\langle l, a \rangle) = \langle P^{\shuffle}(l),a \rangle, \quad a \in G(V).
-        %   \end{align*}
-        % \end{itemize}
         }
       \end{bemerkung*}
       \newpage
@@ -637,12 +624,6 @@ tmargin={4cm},bmargin = {3cm}]{geometry}
         \hfill\break
         Sei im Folgenden stets $(\Omega, \mathcal{F},\mathbb{P})$ ein Wahrscheinlichkeitsraum, $\hat{\mathbb{X}} \in \hat{\Omega}_T^p$ ein stochastischer Prozess, $Y: [0,T] \times \Omega \rightarrow \mathbb{R}$ ein reelwertiger stetiger bezüglich $\mathcal{F}_t$ adaptierter stochastischer Prozess mit
         $\mathcal{F}_t = \sigma(\hat{\mathbb{X}}_{0,s} : 0 \leq s \leq t)$. Wir möchten das optimale Stoppen für $Y$ lösen und nehmen an, dass $Y_0 = 0$ gilt.
-        % \begin{itemize}
-        %   \item später werden wir sehen, dass die von Signatur Stopping Policies induzierte Stoppzeit die optimale Stoppzeit für unser Problem im Sinne von der Konvergenz der zugehörigen Wertefunktionen approximiert.
-        %   \item $(\Omega, \mathcal{F},\mathbb{P})$, $\hat{\mathbb{X}}$ ist ein stochastischer Prozess in $\hat{\Omega}_T^p$, $Y: [0,T] \times \Omega \rightarrow \mathbb{R}$ ist ein reelwertiger stetiger stochastischer Prozess adaptiert bzgl. $\mathcal{F}_t$, $\mathcal{F}_t = \sigma(\hat{\mathbb{X}}_{0,s} : 0 \leq s \leq t)$.
-        %   \item wir versuchen das optimale Stopproblem für $Y$ zu lösen und wir nehmen an, dass $X_0 = 0$
-        %   \item Das Objekt im folgenden Abschnitt: randomisierte Stoppzeit, führt dazu, dass man geeignete Stoppzeiten in einem allgemeineren Approximationsproblems untersuchen kann
-        % \end{itemize}
         }
       \end{bemerkung*}
       \begin{definition} \
@@ -1094,7 +1075,7 @@ tmargin={4cm},bmargin = {3cm}]{geometry}
       \end{itemize}
       Für die Bestimmung von $l_n$ in der Gleichung (\ref{eqn: l_n}) wenden wir zunächst die Monte-Carlo Methode für die Approximation des Erwartungswerts und Gradient Descent Methode für die Bestimmung der optimalen Lösung $l^*_n$ an.
       %Wir haben in unserem Optimierungsproblem stochastische Größen, was das Problem zu einem stochastischen Optimierungsproblem umwandelt. Daher eignet sich die Monte Carlo Methode besonders gut für die Approximation des Erwartungswerts in \ref{eqn: l_n}.
-      Eine Einführung in die Monte Carlo Methode findet man in Appendix \ref{appendix:mc-methode}. Die konventionelle Gradient Descent Methode hat in unserem Fall schlecht performt, da die Gradienten von dem zu optimierenden Funktional in (\ref{eqn: l_n)} dünn besetzt ist und somit die Änderung pro Schritt sehr klein ist. In manchen Fällen konvergiert die Methode gar nicht gegen einen Punkt. Stattdessen springen die Werte in einem kleinen Bereich hin und her. Da das Problem in vielen Deep Learning Optimierungsproblemen auch vorkommt, haben wir als Ausweg die Adam Methode \cite{kingma_adam_2017} gewählt. Die Kernidee von Adam ist die Schätzung der ersten und zweiten Momente vom Gradient des Funktionals und die Verwendung solcher Schätzungen in der Schrittweite. Dadurch ermöglicht die Adam Methode einem, dass Schrittweite in jedem Iterationsschritt individuell gesetzt werden. Eine ausführliche Einführung in die Methode haben wir in Appendix \ref{appendix: adam method} verfasst.
+      Eine Einführung in die Monte Carlo Methode findet man in Appendix \ref{appendix:mc-methode}. Die konventionelle Gradient Descent Methode hat in unserem Fall schlecht performt, da die Gradienten von dem zu optimierenden Funktional in (\ref{eqn: l_n}) dünn besetzt ist und somit die Änderung pro Schritt sehr klein ist. In manchen Fällen konvergiert die Methode gar nicht gegen einen Punkt. Stattdessen springen die Werte in einem kleinen Bereich hin und her. Da das Problem in vielen Deep Learning Optimierungsproblemen auch vorkommt, haben wir als Ausweg die Adam Methode \cite{kingma_adam_2017} gewählt. Die Kernidee von Adam ist die Schätzung der ersten und zweiten Momente vom Gradient des Funktionals und die Verwendung solcher Schätzungen in der Schrittweite. Dadurch ermöglicht die Adam Methode einem, dass Schrittweite in jedem Iterationsschritt individuell gesetzt werden. Eine ausführliche Einführung in die Methode haben wir in Appendix \ref{appendix: adam method} verfasst.
       \begin{bemerkung*}
         \textup{
         Nachdem wir die Idee von \cite{becker_deep_2019} zur Motivation der Hybridmethode eingeführt und das Konzept unserer beiden Methoden vorgestellt haben, werden wir im nächsten Abschnitt die experimentellen Resultaten auswerten und darüber diskutieren. Wir geben bekannt, unter welchen Bedingungen an Hardwares und Softwares wir die Experimente durchgeführt haben und welche Einschränkung diese Bedingungen uns verursacht haben. Eine Auswertung der Relation zwischen dem Hurstparameter und dem optimal gestoppten Erwartungswert für fraktonale Brownsche Bewegungen wie in \cite{becker_deep_2019} haben wir ebenfalls für die Signaturmethode und die Hybridmethode erstellt.
@@ -1103,38 +1084,11 @@ tmargin={4cm},bmargin = {3cm}]{geometry}
 
       \newpage
 
-      % \section{Experimentelle Resultate}
-      % \textcolor{red}{wird am Samstag der 11.09.2021 geschrieben} In diesem Kapitel werden die Resultate der Simualtion ausgewertet und auf Pro und Contra diskutiert. (kann auch mit dem obigen Kapitel zusammengeführt werden).
-      % \begin{itemize}
-      %   \item Beschreibung unserer Resultate
-      %   \item Vergleich mit dem von Becker
-      %   \item Mögliche Verbesserung bzw. was würde ich in der Zukunft verbessern
-      % \end{itemize}
-      % Inhalt:
-      % \begin{itemize}
-      %   \item wir haben wie in dem Paper von Becker \cite{becker_deep_2019} die Wertefunktion mit dem Hurstparameter verglichen. Dabei stellt es sich heraus, dass das asymptotisches Verhalten von der Wertefunktion bzgl. des Hurstparameters bis zum Punkt 0 bei beiden Untersuchungen nahezu identisch ist. Siehe Graphen \textit{DOS} und \textit{my-plot}. \textcolor{red}{soll ich hier den orangen Graphen erwähnen und beschreiben?}
-      %   \item in dem Beispiel "Bermudan Option" sehen wir ebenfalls:
-      %   \begin{itemize}
-      %     \item wie sieht die Stopregel hier aus?
-      %     \item welche Methode weist einen größeren Wertefunktion auf?
-      %     \item welche Methode hat kürzere Berechnungszeit?
-      %     \item welche Indikatoren kann man noch vergleichen?
-      %   \end{itemize}
-      %   \item benötigte Graphen:
-      %   \begin{itemize}
-      %     \item Expect vs. Hurst bei der Signatur Methode
-      %     \item Graphen für die Bermudan Option
-      %     \item Tabelle für die Trainingszeit bei verschied. N
-      %     \item Expect vs. Hurst bei Deep Signatur Methode (dafür muss ich den Programm über Nacht laufen lassen.)
-      %   \end{itemize}
-      % \end{itemize}
-      %
-      % \newpage
-
     \section{Diskussionen und Limitationen}
       In diesem Abschnitt werten wir die Ergebnisse aus der numerischen Implementierung aus. Als Testobjekt haben wir die fraktionale Brownsche Bewegung ausgewählt, da diese weder ein Markovprozess noch ein Martingal ist. Als Benchmark verwenden wir das Resultat aus \cite{becker_deep_2019} für das Testobjekt und messen ebenfalls die Relation zwischen dem Hurstparameter und $\underset{\tau \in \mathcal{T}}{sup} \mathbb{E}[Y_{\tau}]$. Die Qualität der Methode ist durch die Messungen reflektiert. Dabei vergleichen wir sowohl die Werte als auch den Verlauf der gemessenen Daten.
       \hfill\break
       Im Anschluss diskutieren wir die Vor- und Nachteile der Signatur- und Hybridmethode. Mögliche Ideen für weitere Forschung werden ebenfalls genannt.
+      Den hier verwendeten Code findet man auf \texttt {Github. \footnote{\url{https://github.com/karushkahn/masterarbeit_code}}}
       \subsection{Experimentaufbau}
         % Resultat von Becker
         In \cite{becker_deep_2019} hat man für die numerische Implementierung eine Stichprobenanzahl von $M = 30'000$ verwendet. Für die Erstellung der Abbildung (\ref{fig: becker_expec_vs_hurst}) berechnet man für $H \in \{0.01,0.05,0.1,0.15,\ldots,1\}$ einzeln die optimale Stoppzeit $\tau^*$ und bestimmt dann den Wert von $\mathbb{E}[B_{\tau^*}^H]$. Für
@@ -1148,7 +1102,7 @@ tmargin={4cm},bmargin = {3cm}]{geometry}
         \end{align*}
 
         \begin{figure}[H]
-          \caption{Deep Optimal Stopping \cite{becker_deep_2019}}
+          \caption{Deep Optimal Stopping \cite{becker_deep_2019, Fig: 1}}
           \centering
           \includegraphics[width=0.9\textwidth]{becker_expec_vs_hurst.jpg}
           {\footnotesize
@@ -1159,10 +1113,10 @@ tmargin={4cm},bmargin = {3cm}]{geometry}
         \end{figure}
         \hfill\break
         % Hardware und Software
-        Für unsere Implementierung haben wir als Hardware das \textit{Raspberry Pi 4} mit 4 GB RAM und einem CPU mit 4 Cores verwendet. Die Entwicklungsumgebung ist das \textit{JupyterLab}. Das ist eine Erweiterung von Jupyter Notebook in Python, womit man zusätzliche IT-technische Einstellungen tätigen kann. Für die Generierung der Stichproben benutzen wir \texttt{fbm \footnote{https://pypi.org/project/fbm/}} und für die grundlegende Berechnung und die Speicherung von Daten \texttt{numpy \footnote{https://pypi.org/project/numpy/}}.
+        Für unsere Implementierung haben wir als Hardware das \textit{Raspberry Pi 4} mit 4 GB RAM und einem CPU mit 4 Cores verwendet. Die Entwicklungsumgebung ist das \textit{JupyterLab}. Das ist eine Erweiterung von Jupyter Notebook in Python, womit man zusätzliche IT-technische Einstellungen tätigen kann. Für die Generierung der Stichproben benutzen wir \texttt{fbm \footnote{\url{https://pypi.org/project/fbm/}}} und für die grundlegende Berechnung und die Speicherung von Daten \texttt{numpy. \footnote{\url{https://pypi.org/project/numpy/}}}
         \hfill\break
         Sei $x_1,\ldots,x_M \in \mathbb{R}^{d \times K}$ die generierte Stichproben mit der Dimension $d$ und der Anzahl an diskrete Zeitpunkte $K$. Die Stichproben werden stets mit der Dimension $d=1$ und $K=100$ generiert. Man beachte, dass wir für unsere Berechnung den erweiterten Prozess betrachten, d.h. $\hat{X}_t = (t,X_t)$. Dann ist die Datenmatrix gegeben durch
-        $\mathbb{D} = [x_1^T,\ldots,x_M^T] \in \mathbb{R}^{K \times M \times ({d+1}})$. Der Zeithorizont ist bei uns in beiden Methoden $T=1$. Für die Berechnung der Signatur verwenden wir \texttt{iisignature \footnote{https://pypi.org/project/iisignature/}}. Das Niveau für die geschnittete Signatur setzen wir in beiden Fällen auf $N=8$. Zusätzlich haben wir in den Graphen wegen der kleinen Datenmengen die Trendlinie gezeichnet, welche durch Interpolation von Polynomen $3.$ Grades erzeugt wurde, um den Verlauf beider Messungen mit dem Graphen in Fig: (\ref{fig: becker_expec_vs_hurst}) besser vergleichen zu können.
+        $\mathbb{D} = [x_1^T,\ldots,x_M^T] \in \mathbb{R}^{K \times M \times ({d+1}})$. Der Zeithorizont ist bei uns in beiden Methoden $T=1$. Für die Berechnung der Signatur verwenden wir \texttt{iisignature. \footnote{\url{https://pypi.org/project/iisignature/}}} Das Niveau für die geschnittete Signatur setzen wir in beiden Fällen auf $N=8$. Zusätzlich haben wir in den Graphen wegen der kleinen Datenmengen die Trendlinie gezeichnet, welche durch Interpolation von Polynomen $3.$ Grades erzeugt wurde, um den Verlauf beider Messungen mit dem Graphen in Fig: (\ref{fig: becker_expec_vs_hurst}) besser vergleichen zu können.
         \hfill\break
         In den Beispielen (\ref{rough_path: brownian_motion}) und (\ref{rough_path: fbm}) haben wir gezeigt, dass die Brownsche Bewegung und die fraktionale Brownsche Bewegung zu Rough Path erweitert werden. Sowohl für die Brownsche Bewegung als auch für die fraktionale Brownsche Bewegung können wir die Theorie der Rough Paths bis hinzu die Resultate für die Signaturen Stoppzeit verwenden.
         \hfill\break
@@ -1231,7 +1185,7 @@ tmargin={4cm},bmargin = {3cm}]{geometry}
         \hfill\break
         Zusammengefasst halten wir fest, dass die Signaturmethode durch ihre Linearität sehr kurze Rechenzeit hat und dadurch für die Verarbeitung von großen Mengen an Daten oder auch multi-dimensionalen Daten sehr gut geeignet ist. Jedoch wird sie erst Anwendung in der Praxis finden, wenn die Qualität der Approximation für die optimale Stoppzeit sich verbessert. Es gibt bislang keine wissenschaftliche Forschungsergebnisse für die Analyse der Qualität bezüglich des optimalen Stoppens mit der Signatur. Das bietet daher eine Grundlage für weitere Forschungsideen.
         \hfill\break
-        Eine Möglichkeit zur Verbesserung der Optimierungsgeschwindigkeit oder auch -qualität in der Hybridmethode ist ein Vergleich der Gradientenverfahren angewandt auf unser Beispiel. Wir haben in dieser Arbeit Adam gewählt, da diese in jedem Schritt die Schätzung für den ersten und den zweiten Moment der Gradienten zur Rechnung gezogen hat und sich für die stochastische Optimierung in der Praxis als effizient herausgestellt hat. Als die Approximation für die Stoppentscheidung in der Hybridmethode haben wir die angepasste logistische Funktion (oder auch Sigmoidfunktion) $F(X)=\Phi(\langle l, X \rangle)$ ausgewählt. Das Phänomen verschwindente Gradienten (Vanishing Gradient) ist bei uns eingetreten. Das heißt, die Gradienten sind ab einem bestimmten Iterationsschritt dünnbesetzt und die gradientenbasierte Methode konvergiert ab dem Zeitpunkt sehr langsam. Aus der Praxis in der Anwendung von tief neuronalen Netzwerken hat sich herausgestellt, dass die logistische Regression das Phänomen verursacht und man entweder eine andere Aktivierungsfunktion oder eine andere Optimierungsmethode wählt. Es sollte daher in die Richtung geforscht werden, welche Optimierungsmethode für die Hybridmethode am besten geeignet ist. Kandidaten dafür sind zum Beispiel die ReLU Funktion oder auch die RelTan Funktion \cite{wang_reltanh_2019}.
+        Eine Möglichkeit zur Verbesserung der Optimierungsgeschwindigkeit oder auch -qualität in der Hybridmethode ist ein Vergleich der Gradientenverfahren angewandt auf unser Beispiel. Wir haben in dieser Arbeit Adam gewählt, da diese in jedem Schritt die Schätzung für den ersten und den zweiten Moment der Gradienten zur Rechnung gezogen hat und sich für die stochastische Optimierung in der Praxis als effizient herausgestellt hat. Als die Approximation für die Stoppentscheidung in der Hybridmethode haben wir die angepasste logistische Funktion (oder auch Sigmoidfunktion) $F(X)=\psi(\langle l, X \rangle)$ ausgewählt. Das Phänomen verschwindente Gradienten (Vanishing Gradient) ist bei uns eingetreten. Das heißt, die Gradienten sind ab einem bestimmten Iterationsschritt dünnbesetzt und die gradientenbasierte Methode konvergiert ab dem Zeitpunkt sehr langsam. Aus der Praxis in der Anwendung von tief neuronalen Netzwerken hat sich herausgestellt, dass die logistische Regression das Phänomen verursacht und man entweder eine andere Aktivierungsfunktion oder eine andere Optimierungsmethode wählt. Es sollte daher in die Richtung geforscht werden, welche Optimierungsmethode für die Hybridmethode am besten geeignet ist. Kandidaten dafür sind zum Beispiel die ReLU Funktion oder auch die RelTan Funktion \cite{wang_reltanh_2019}.
         \hfill\break
         Zwar gibt es die Konvergenzanalyse von \cite{becker_deep_2019} für DNN. Aber die Konvergenz der Hybridmethode ist nicht untersucht. Desweiteren ist die Forschung über den Zusammenhang zwischen dem Niveau der Signatur und der Qualität des optimalen Stoppens erwünscht. Es ist intuitiv, dass je höher das Niveau ist, umso größer ist der Informationsgehalt von dem Pfad. Aber wir sollten bedenken, je höher das Niveau ist, umso mehr Rechenaufwand benötigt die Methode für die Bestimmung der optimalen Stoppzeit. Die Idee ist also, durch numerische Experimente das optimale Niveau $N^*$ zu finden, das eine gute Qualität für das Lösen vom optimalen Stoppen ohne enormen Rechenaufwand liefert.
         \hfill\break
@@ -1263,7 +1217,7 @@ tmargin={4cm},bmargin = {3cm}]{geometry}
       \end{align*}
       anstatt ein tief neuronales Netzwerk wie in \cite{becker_deep_2019}.
       \hfill\break
-      Die numerische Resultate aus \cite{becker_deep_2019} dienen als der Benchmark für unsere Methode. Verglichen werden die berechnete Werte für $\mathbb{E}[Y_{\tau^* \wedge T}]$ mit den jeweiligen Erwartungswerten $sup \ \mathbb{E}[Y_{\tau \wedge T}]$, welche jeweils durch die optimalen Stoppzeiten $\tau^*$ aus beider Methoden berechnet sind. Die Resultate aus den numerischen Experimenten zeigen, dass qualitativ die Hybridmethode deutlich überragener ist. Aber die Laufzeitperformence ist im Vergleich zu der Signaturmethode deutlich schlechter. Jedoch schränkt unser Hardware uns bei der Performance stark ein, was definitiv einen Einfluss auf die Laufzeit hat. Durch diese Einschränkung ist zusätzlich die verwendeten Datenmenge sehr klein, so dass im Sinne des Gesetzes der großen Zahlen eine gute Approximation nicht möglich ist.
+      Die numerische Resultate davon dienen als der Benchmark für unsere Methode. Verglichen werden die berechnete Werte für $\mathbb{E}[Y_{\tau^* \wedge T}]$ mit den jeweiligen Erwartungswerten $sup \ \mathbb{E}[Y_{\tau \wedge T}]$, welche jeweils durch die optimalen Stoppzeiten $\tau^*$ aus beider Methoden berechnet sind. Die Resultate aus den numerischen Experimenten zeigen, dass qualitativ die Hybridmethode deutlich überragener ist. Aber die Laufzeitperformence ist im Vergleich zu der Signaturmethode deutlich schlechter. Jedoch schränkt unser Hardware uns bei der Performance stark ein, was definitiv einen Einfluss auf die Laufzeit hat. Durch diese Einschränkung ist zusätzlich die verwendeten Datenmenge sehr klein, so dass im Sinne des Gesetzes der großen Zahlen eine gute Approximation nicht möglich ist.
       \hfill\break
       Zwar ist die Optimalität der Stoppzeit in der Hybridmethode durch Lemma (\ref{lemma: bayer_st_theta}) gewährleistet. Jedoch haben wir die Konvergenzanalyse für das Funktional in (\ref{eqn: l_n}) in dieser Arbeit nicht diskutiert. Im Hinblick darauf kann es sinnvoll sein, theoretische Beweise dafür zu erforschen. Weiterführende Forschung könnte die Verbesserung der Rechenzeit für die Hybridmethode aus einer neuen Perspektive betrachten. Wenn der Rechenaufwand sich dadurch reduziert hat, könnte die zukünftige Forschung an weitere Anwendungsfälle knüpfen, indem man z.B. diese Methode für die Bepreisung von Optionen wie die American Put Option oder die Bermudan-Max-Call Option einsetzt.
     \printbibliography
@@ -1305,88 +1259,11 @@ tmargin={4cm},bmargin = {3cm}]{geometry}
         \end{align*}
         Für $H \in (0,1/2)$ hat die FBM die Eigenschaft Konterpersistenz, d.h. wenn der Prozess in der Vergangenheit ein monoton wachsendes Wachstum aufweist, ist es wahrscheinlicher, dass der Prozess in der Zukunft monoton fällt und vice versa. Dagegen ist der Prozess für $H \in (1/2,1)$ persistenz, d.h. die monotone Eigenschaft bleibt auf dem gesamten Zeithorizont unverändert. Für solche $H$ hat die FBM die Eigenschaft des Long-Memory.
       \end{itemize}
-      % \textcolor{red}{Stetigkeit von FBM:}
-      % Wie bei jedem stochastischen Prozess interessieren wir auch für die Stetigkeit der FBM. Es gibt viele Möglichkeiten, die Stetigkeit nachzuweisen. In dieser Arbeit werden wir das \textit{Kolmogorov-Chentsov Theorem} vorstellen. Nichtsdestotrotz basieren alle Möglichkeiten für den Nachweis der Stetigkeit auf der selben Formel:
-      % \begin{align*}
-      %   \mathbb{E}[(B_t^H - B_s^H)^2] = \lvert t-s \rvert^{2H}
-      % \end{align*}
-      % für das \textcolor{red}{Variogram} der FBM.
-      % \begin{theorem-non}[Kolmogorov-Chentsov Stetigkeitstheorem]
-      %   Sei $(X_t)_{t \geq 0}$ ein stochastischer Prozess. Angenommen es existieren $K>0, p>0, \beta > 0 $, so dass für alle $t \geq 0, s\geq 0$ gilt:
-      %   \begin{align*}
-      %     \mathbb{E}[\lvert X_t - X_s\rvert^p] \leq K \lvert t -s \rvert^{1+\beta}.
-      %   \end{align*}
-      %   Dann hat der Prozess eine stetige Modifikation, d.h. es gibt einen Prozess $\tilde{X}_t$ mit $\tilde{X} \in \mathcal{C}([0,\infty)$ und für alle $t\geq 0$ gilt $\mathbb{P}(X_t = \tilde{X}_t)=1$. Ferner ist für alle $\gamma \in (0,\frac{\beta}{p})$ und für $T>0$ ist der Prozess $\tilde{X}$ $\gamma$-Hölder stetig auf $[0,T]$:
-      %   \begin{align*}
-      %     \underset{0\leq s < t \leq T}{sup} \ \frac{\lvert \tilde{X}_t - \tilde{X}_s\rvert}{(t-s)^{\gamma}} < \infty.
-      %   \end{align*}
-      % \end{theorem-non}
-      % \begin{corollary-non}
-      %   Die fraktionale Brownsche Bewegung $B^H$ hat stetige Modifikation. Ferner ist diese Modifikation $\gamma$-Hölder stetig auf jedem endlichen Zeitintervall für alle $\gamma \in (0,H)$.
-      % \end{corollary-non}
-      % \begin{beweis-non}
-      %   \textup{
-      %   Da $B_t^H - B_s^H$ ein zentrierter Gaußprozess mit der Varianz $\lvert t - s \rvert^H$ ist, gilt $\mathbb{E}[\lvert B_t^H - B_s^H \rvert]=K_p\lvert t - s \rvert^{pH}$. Wähle $p > 1/H$, dann erhalten wir die Existenz der stetigen Modifikation mit Kolmogorov-Chentsov Stetigkeitstheorem. Die Bedingung für die Hölder Stetigkeit von der Modifikation mit $\gamma \in (0,H-1/p)$ auch erfüllt, wenn wir $p$ hinreichend groß wählen.
-      %   }
-      % \end{beweis-non}
-      % Für weitere Methoden verweisen wir auf \cite{shevchenko_fractional_2014}.
       \begin{bemerkung*}
         \textup{
         Abhängig von $H \in (0,1/2)$ bzw. $H \in (1/2,1)$ sind die Inkremente von der FBM negativ bzw. positiv korreliert \cite{grimmett2020probability}. Außerdem wachsen die Korrelation und die Persistenz der FBM mit $H$. Für $H=1$ wird die FBM zu einer linearen Funktion: $B_t^1=\xi t$, wobei $\xi$ ein Standard Gaußprozess ist.
         }
       \end{bemerkung*}
-      % \textcolor{red}{Integralrepräsentation von FBM (ist das denn überhaupt noch notwendig???) JA: das zeigt die Existenz der FBM}: Das Konzept für die integrale Repräsentation der FBM ist vergleichbar mit der klassischen Ito Repräsentation für Martingale. Sei also $(W_t)_{t\geq 0}$ ein reellwertiger Wiener Prozess, so dass $(W_t)_{t\geq0}$ und $(W_{-t})_{t\geq 0}$ unabhängige Standard Wiener Prozesse auf $[0,\infty )$ sind. Für Funktionen $f \in \mathcal{L}^2(\mathbb{R})$ ist das Integral $I(f) = \int_{\mathbb{R}}f(x)dW(x)$ bzgl. $W$ durch maßtheoretische Induktion von einfachen Indikatorfunktionen bis hinzu
-      % $\mathcal{L}^2$ Funktionen mit der Ito Isometrie konstruiert.\cite{Kapitel 25, Wahrscheinlichkeitstheorie, Achim Klemke}
-      %
-      % Für die Existenz der FBM betrachten wir die Repräsentation folgender Form:
-      % \begin{align*}
-      %   B^H_t = I(k_t)=\int_{\mathbb{R}}k_t(x)dW(x),
-      % \end{align*}
-      % \begin{bemerkung*}[Mandelbrot-van Ness Repräsentation]
-      %   \textup{
-      %   Für $H \in (0,1)$ definieren wir:
-      %   \begin{align*}
-      %     k_H^{MA}(x)=K_H^{MA}((t-x)_t^{H-1/2}\mathds{1}_{(-\infty,0)(x)-(-x)^{H-1/2}}),
-      %   \end{align*}
-      %   wobei $K_H^{MA} = (\frac{1}{2H} + \int_0^\infty((x+1)^{H-1/2}-x^{H-1/2})^2dx)^{-1/2} = \frac{(\Gamma(2H+1)sin \pi H)^{1/2}}{\Gamma (H+1/2)}$. Dann ist der Prozess $X_t = I(k_t^{MA})$ eine fBm mit dem Hurst Parameter H und es gilt $k_t^{MA} \in L^2(\mathbb{R})$.
-      %   \begin{itemize}
-      %     \item das ist eine Integral Repräsentation mit Moving Average
-      %     \item es gibt noch andere wie z.B. blablabla. detailierte Informationen findet man in \cite{Fractional Brownian Motion in a Nutshell}
-      %   \end{itemize}
-      %   }
-      % \end{bemerkung*}
-      % \hfill\break
-      % \textcolor{red}{wofür habe ich das nochmals gebraucht?} Für die Analyse der Resultate aus unserem Experiment möchten wir \textit{das Gesetz der iterierten Logarithmus} vorstellen. Wir starten mit der Brownschen Bewegung. Sei $(B_t)_{t\geq 0}$ eine Brownsche Bewegung. Das \textit{Blumenthal'sche 0-1 Gesetz} für Brownsche Bewegung besagt
-      % \begin{itemize}
-      %   \item wir starten mit Brownsche Bewegung
-      %   \item Motivation: Blumenthal'schen 0-1 Gesetz für BM
-      %   \begin{align*}
-      %     \underset{t \rightarrow 0 }{limsup} \frac{B_t}{\sqrt{t}}= \infty f.s.
-      %   \end{align*}
-      %   \item mit $tB_{1/t}$ ist eine BM gilt dann:
-      %   \begin{align*}
-      %     \underset{t \rightarrow \infty }{limsup} \frac{B_t}{\sqrt{t}}= \infty
-      %   \end{align*}
-      %   \item Ziel: ersetze $\sqrt{t}$ durch eine Funktion, so das Limes Superior endlich und nicht trivial ist.
-      %   \item Erweiterung auf fBm...
-      % \end{itemize}
-      % \begin{theorem}[Gesetz der iterierten Logarithmus]
-      %   Sei $B_t$ eine Brownsche Bewegung. Dann gilt:
-      %   \begin{align*}
-      %     \underset{t \rightarrow \infty}{limsup} \frac{B_t}{\sqrt{2t \ log(log(t))}} = 1, \ f.s.
-      %   \end{align*}
-      % \end{theorem}
-      %
-      % \hfill\break
-      % hier kommt der letzter Abschnitt. Folgende Punkte sollten erläutert werden:
-      % \begin{itemize}
-      %   \item financial modelling with fBm
-      %   \item pathwise integration with fbm
-      %   \item fbm in physics
-      %   \item other important results for fbm
-      % \end{itemize}
-
-
       \newpage
 
       \subsection{Monte Carlo Simulation}\label{appendix:mc-methode}
@@ -1462,23 +1339,10 @@ tmargin={4cm},bmargin = {3cm}]{geometry}
         & \alpha_t = \alpha \cdot \sqrt{1-\beta_2^t}/(1-\beta_1^t) \\
         & \theta_t \leftarrow \theta_{t-1} - \alpha_t \cdot m_t / (\sqrt{v_t}+\hat \varepsilon).
       \end{align*}
-      Eine wichtige Eigenschaft der Aktualisierungsregel von Adam ist die Auswahl der Schrittgrößen. Unter der Annahme von $\varepsilon = 0$ ist der zum Zeitpunkt $t$ vorgenommene Aktualisierungsregel $\Delta_t = \alpha \cdot \hat m_t / \sqrt{\hat v_t}$. Die Schrittweite hat zwei obere Schranken: $\lvert \Delta_t \rvert \leq \alpha \cdot (1-\beta_1) / \sqrt{1-\beta_2}$ im Falle $(1-\beta_1) > \sqrt{1-\beta_2}$ und $\lvert \Delta_t \rvert \leq \alpha$ sonst. Der erste Fall tritt in dem Fall auf, wenn ein Gradient in allen Zeitschritten außer im aktuellen Zeitschritt Null ist. Für den weniger dünnbesetzten Fall ist die Schrittweite kleiner. Wenn $(1-\beta_1) = \sqrt{1-\beta_2}$ gilt, dann haben wir $\lvert \hat m_t / \sqrt{\hat v_t} \rvert < 1$ und damit $\lvert \Delta_t \rvert < \alpha$. In den meisten Fällen haben wir $\hat m_t / \sqrt{\hat v_t} \approx \pm 1$, da $\lvert \mathbb{E}[g]/ \sqrt{\mathbb{E}[g^2]} \rvert \leq 1$. Die Größe der Schritte, die im Parameterraum bei jedem Zeitschritt gemacht werden, sind näherungsweise begrenzt durch $\alpha$, d.h. $\lvert \Delta_t \rvert \lessapprox \alpha$. % Dies kann als die Schaffung einer Vertrauensregion um den aktuellen Parameterwert verstanden werden, über den hinaus die aktuelle Gradientenschätzung nicht ausreichend Informationen liefert. Dies macht es normalerweise relativ einfach, die richtige Skala von $\alpha$ im Voraus zu kennen. Für viele Machine-Learning-Modellen wissen wir zum Beispiel oft im Voraus, dass gute Optima mit hoher Wahrscheinlichkeit innerhalb eines bestimmten Bereichs im Parameterraum sind. Es ist zum Beispiel nicht ungewöhnlich, eine Verteilung über die Parameter im Voraus zu kennen. Da $\alpha$ eine obere Schranke von der Schrittweite im Parameterraum setzt, können wir oft die richtige Größenordnung von $\alpha$ ableiten, so dass Optima kann von $\theta_0$ innerhalb einiger Iterationen erreicht werden. Mit einem leichten Missbrauch der Terminologie nennen wir das Verhältnis $\hat m_t / \sqrt{\hat v_t}$ das "signal-to-noise ratio" (SNR). Bei einem kleineren SNR ist die effektive Schrittweite $t$ näher an Null. Dies ist eine wünschenswerte Eigenschaft, da ein kleineres SNR bedeutet, dass es eine größere Unsicherheit darüber besteht, ob die Richtung von $\hat m_t$ der Richtung des wahren Gradient entspricht. Zum Beispiel nähert sich der SNR-Wert typischerweise in Richtung eines Optimums 0 an, wobei zu kleineren effektiven Schritten im Parameterraum: eine Form des automatischen Annealings. Die effektive Schrittweite ist auch invariant bzgl. der Skalierung des Gradients. Eine Neuskalierung des Gradients mit Faktor $c$ verändert $\hat m_t$ um den Faktor $c$ und $\hat v_t$ um den Faktor $c^2$, die sich dann gegenseitig aufheben: $(c \cdot \hat m_t) / (\sqrt{c^2 \cdot \hat v_t}) = \hat m_t / \sqrt{\hat v_t}$.
+      Eine wichtige Eigenschaft der Aktualisierungsregel von Adam ist die Auswahl der Schrittgrößen. Unter der Annahme von $\varepsilon = 0$ ist der zum Zeitpunkt $t$ vorgenommene Aktualisierungsregel $\Delta_t = \alpha \cdot \hat m_t / \sqrt{\hat v_t}$. Die Schrittweite hat zwei obere Schranken: $\lvert \Delta_t \rvert \leq \alpha \cdot (1-\beta_1) / \sqrt{1-\beta_2}$ im Falle $(1-\beta_1) > \sqrt{1-\beta_2}$ und $\lvert \Delta_t \rvert \leq \alpha$
+      sonst. Der erste Fall tritt in dem Fall auf, wenn ein Gradient in allen Zeitschritten außer im aktuellen Zeitschritt Null ist. Für den weniger dünnbesetzten Fall ist die Schrittweite kleiner. Wenn $(1-\beta_1) = \sqrt{1-\beta_2}$ gilt, dann haben wir $\lvert \hat m_t / \sqrt{\hat v_t} \rvert < 1$ und damit $\lvert \Delta_t \rvert < \alpha$. In den meisten Fällen haben wir $\hat m_t / \sqrt{\hat v_t} \approx \pm 1$, da $\lvert \mathbb{E}[g]/ \sqrt{\mathbb{E}[g^2]} \rvert \leq 1$.
+      Die Größe der Schritte, die im Parameterraum bei jedem Zeitschritt gemacht werden, sind näherungsweise begrenzt durch $\alpha$, d.h. $\lvert \Delta_t \rvert \lessapprox \alpha$. % Dies kann als eine Konstruktion einer Vertrauensgebiets um den aktuellen Parameterwert verstanden werden, über den hinaus die aktuelle Gradientenschätzung nicht ausreichend Informationen liefert. Dies macht es normalerweise relativ einfach, die richtige Skala von $\alpha$ im Voraus zu kennen. Für viele Machine-Learning-Modellen wissen wir zum Beispiel oft im Voraus, dass gute Optima mit hoher Wahrscheinlichkeit innerhalb eines bestimmten Bereichs im Parameterraum sind. Es ist zum Beispiel nicht ungewöhnlich, eine Verteilung über die Parameter im Voraus zu kennen. Da $\alpha$ eine obere Schranke von der Schrittweite im Parameterraum setzt, können wir oft die richtige Größenordnung von $\alpha$ ableiten, so dass Optima kann von $\theta_0$ innerhalb einiger Iterationen erreicht werden. Mit einem leichten Missbrauch der Terminologie nennen wir das Verhältnis $\hat m_t / \sqrt{\hat v_t}$ das "signal-to-noise ratio" (SNR). Bei einem kleineren SNR ist die effektive Schrittweite $t$ näher an Null. Dies ist eine wünschenswerte Eigenschaft, da ein kleineres SNR bedeutet, dass es eine größere Unsicherheit darüber besteht, ob die Richtung von $\hat m_t$ der Richtung des wahren Gradient entspricht. Zum Beispiel nähert sich der SNR-Wert typischerweise in Richtung eines Optimums 0 an, wobei zu kleineren effektiven Schritten im Parameterraum: eine Form des automatischen Annealings. Die effektive Schrittweite ist auch invariant bzgl. der Skalierung des Gradients. Eine Neuskalierung des Gradients mit Faktor $c$ verändert $\hat m_t$ um den Faktor $c$ und $\hat v_t$ um den Faktor $c^2$, die sich dann gegenseitig aufheben: $(c \cdot \hat m_t) / (\sqrt{c^2 \cdot \hat v_t}) = \hat m_t / \sqrt{\hat v_t}$.
       \hfill\break
-      % Wir diskutieren weiter über die Korrekturbedingung der Initialisierungsverzerrung und leiten die Formel für den zweiten Moment des Zielfunktionals her. Für die Herleitung des ersten Moments sind die Schritte analog.
-      % \hfill\break
-      % Sei $g$ der Gradient der stochastischen Zielfunktion $f$. Wir möchten den zweiten Moment (Varianz) unter Verwendung eines exponentiellen bewegenden Durchschnitts des Qudarat-Gradienten mit einer Zerfallrate von $\beta_2$ schätzen. Sei $g_1,\ldots,g_T$ die Gradienten in den diskreten Zeitschritten und jeder eine Realisierung aus einer darunter liegenden Gradientenverteilung $g_t \sim p(g_t)$. Wir initialisieren den exponentiellen bewegenden Durchschnitt mit $v_0 = 0$ (einem Vektor von Nullen) und definieren die Aktualisierungsregel des exponentiellen bewegenden Durchschnitt zum Zeitpunkt $t$ als $v_t = \beta_2 \dot v_{t-1} + (1-\beta_2)\dot g_t^2$ (wobei $g_t^2=g_t \odot g_t$). Diese können wir als Funktion der Gradienten von allen vorherigen Zeitschritten schreiben:
-      % \begin{align*}
-      %   v_t = (1-\beta_2)\sum_{i=1}^{t}\beta_2^{t-i}\cdot g_i^2
-      % \end{align*}
-      % Mithilfe dieser Gleichung können wir die Relation zwischen $\mathbb{E}[v_t]$ und $\mathbb{E}[g_t^2]$ herleiten:
-      % \begin{align*}
-      %   \mathbb{E}[v_t] &= \mathbb{E}[(1-\beta_2)\sum_{i=1}^{t}\beta_2^{t-i}\cdot g_i^2]\\
-      %   &= \mathbb{E}[g_t^2] \cdot (1-\beta_2)\sum_{i=1}^{t}\beta_2^{t-i} + \xi \\
-      %   &= \mathbb{E}[g_t^2] \cdot (1-\beta_2^t)+\xi,
-      % \end{align*}
-      % sodass wir die Lücke zwischen den beiden korrigieren können. Falls der zugrundeliegende zweite Moment $g_t^2$ stationär ist, gilt $\xi = 0$. Andernfalls kann man $\xi$ klein wählen, da die exponentielle Verfallrate $\beta_1$ so gewählt werden kann, dass der exponentielle bewegende Durchschnitt den Gradienten kleine Gewichte zuordnet. \textcolor{red}{was heißt den das?} Es bleibt noch $(1-\beta_2^t)$ übrig. Dieser Term entsteht durch die Initialisierung des bewegenden Durchschnitts mit $0$. In dem Algorithmus \ref{adam: algo} haben wir durch den Term geteilt, um die Initialisierungsverzerrung zu korrigieren.
-      % \hfill\break
-      % Falls der Gradient dünn-besetzt ist, brauchen wir für eine zuverlässige Abschätzung des zweiten Moments den Durchschnitt über allen Gradienten, indem wir einen kleinen $\beta_2$ wählen. Das ist aber genau der Fall, wo der $\beta_2$ klein ist, die Korrektur der Initialisierungsverzerrung nicht vorhanden ist und folglich die Initialschritte größer sind als bei größeren $\beta_2$'s.
       In \cite{kingma_adam_2017} hat man für die Analyse des Konvergenzverhaltens das Online Learning Framework von \cite{zinkevich_online_2003} gewählt. Bei beliebigen, unbekanten Folgen von konvexen Kostenfunktionen $f_1(\theta),\ldots,f_T(\theta)$ entlang der Zeit $t\in [1,T]$ möchten wir in jedem Zeitpunkt $t$ den optimalen Parameter $\theta$ finden und diesen in den unbekannten Kostenfunktion aus den vorherigen Zeitpunkten $s \in [1,t]$ einsetzen und auswerten. Dafür nehmen wir die Fehlerfunktion, welche die Summe von den Differenzen zwischen $f_t(\theta_t)$ und $f_t(\theta^*)$ ist:
       \begin{align*}
         R(T) = \sum_{t=1}^T [f_t(\theta_t) - f_t(\theta^*)],
