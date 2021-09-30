@@ -206,8 +206,9 @@ tmargin={4cm},bmargin = {3cm}]{geometry}
     \end{align*}
     mit Monte Carlo Approximation bestimmt sind. $F_n^l(\hat{\mathbb{X}}^{\leq N}) = \psi( \langle l, \hat{\mathbb{X}}^{\leq N}_{0,t_n} \rangle - 1)$ ist die Approximation für $f_n^l$ mit der logistischer Funktion $\psi$, damit wir die gradientenbasierte Optimierungsmethoden verwenden können. Die optimale Stoppzeit ist gegeben durch
     \begin{align*}
-      \tau^* := \sum_{n=1}^K t_nf_n^{l_n}(\hat{\mathbb{X}}^{\leq N})\prod_{j=0}^{n-1}(1-f_j^{l_j}(\hat{\mathbb{X}}^{\leq N}))
+      \tau^* := \sum_{n=1}^K t_nf_n^{l_n}(\hat{\mathbb{X}}^{\leq N})\prod_{j=0}^{n-1}(1-f_j^{l_j}(\hat{\mathbb{X}}^{\leq N})).
     \end{align*}
+    Das Resultat dieser Arbeit ist die Auswertung dieser beiden Methoden. Dabei gehen wir auf die Qualität der Stoppzeiten sowie den Verlauf der Kurve für die Relation zwischen $sup \ \mathbb{E}[Y_{\tau \land T}]$ und dem Hurstparameter $H$ ein.
     \hfill\break
     Wir teilen die gleiche theoretische Resultate wie in \cite{bayer_optimal_2020}. In der Arbeit hat man das optimale Stoppen mit Rough Path zunächst die Gleichung (\ref{eqn: bayer_result}) linearisiert:
     \begin{align}\label{eqn: bayer_linearisation}
@@ -1135,108 +1136,108 @@ tmargin={4cm},bmargin = {3cm}]{geometry}
       \hfill\break
       Im Anschluss diskutieren wir die Vor- und Nachteile der Signatur- und Hybridmethode. Mögliche Ideen für weitere Forschung werden ebenfalls genannt.
       \subsection{Experimentaufbau}
-      % Resultat von Becker
-      In \cite{becker_deep_2019} hat man für die numerische Implementierung eine Stichprobenanzahl von $M = 30'000$ verwendet. Für die Erstellung der Abbildung (\ref{fig: becker_expec_vs_hurst}) berechnet man für $H \in \{0.01,0.05,0.1,0.15,\ldots,1\}$ einzeln die optimale Stoppzeit $\tau^*$ und bestimmt dann den Wert von $\mathbb{E}[B_{\tau^*}^H]$. Für
-      $H=1/2$ haben wir die Brownsche Bewegung. Theoretisch ist $\mathbb{E}[B^{1/2}_{\tau}] = 0$ und in der Abbildung ist diese Aussage bestätigt. Für $H = 1$ hat man $B_t^1 = tB_{t_1}^1$. In diesem Fall ist die optimale Stoppzeit gegeben durch
-      \begin{align*}
-        \tau =
-        \begin{cases}
-          1 & \textup{falls } B_{t_1}^1 > 0 \\
-          t_1 & \textup{falls } B_{t_1}^1 \leq 0
-        \end{cases}
-      \end{align*}
+        % Resultat von Becker
+        In \cite{becker_deep_2019} hat man für die numerische Implementierung eine Stichprobenanzahl von $M = 30'000$ verwendet. Für die Erstellung der Abbildung (\ref{fig: becker_expec_vs_hurst}) berechnet man für $H \in \{0.01,0.05,0.1,0.15,\ldots,1\}$ einzeln die optimale Stoppzeit $\tau^*$ und bestimmt dann den Wert von $\mathbb{E}[B_{\tau^*}^H]$. Für
+        $H=1/2$ haben wir die Brownsche Bewegung. Theoretisch ist $\mathbb{E}[B^{1/2}_{\tau}] = 0$ und in der Abbildung ist diese Aussage bestätigt. Für $H = 1$ hat man $B_t^1 = tB_{t_1}^1$. In diesem Fall ist die optimale Stoppzeit gegeben durch
+        \begin{align*}
+          \tau =
+          \begin{cases}
+            1 & \textup{falls } B_{t_1}^1 > 0 \\
+            t_1 & \textup{falls } B_{t_1}^1 \leq 0
+          \end{cases}
+        \end{align*}
 
-      \begin{figure}[H]
-        \caption{Deep Optimal Stopping \cite{becker_deep_2019}}
-        \centering
-        \includegraphics[width=0.9\textwidth]{becker_expec_vs_hurst.jpg}
-        {\footnotesize
+        \begin{figure}[H]
+          \caption{Deep Optimal Stopping \cite{becker_deep_2019}}
+          \centering
+          \includegraphics[width=0.9\textwidth]{becker_expec_vs_hurst.jpg}
+          {\footnotesize
+          \hfill\break
+          $W_t^H$ ist hier im Beispiel (\ref{bsp: becker_fbm}) konstruierter Markovprozess.
+          \par}
+          \label{fig: becker_expec_vs_hurst}
+        \end{figure}
         \hfill\break
-        $W_t^H$ ist hier im Beispiel (\ref{bsp: becker_fbm}) konstruierter Markovprozess.
-        \par}
-        \label{fig: becker_expec_vs_hurst}
-      \end{figure}
-      \hfill\break
-      % Hardware und Software
-      Für unsere Implementierung haben wir als Hardware das \textit{Raspberry Pi 4} mit 4 GB RAM und einem CPU mit 4 Cores verwendet. Die Entwicklungsumgebung ist das \textit{JupyterLab}. Das ist eine Erweiterung von Jupyter Notebook in Python, womit man zusätzliche IT-technische Einstellungen tätigen kann. Für die Generierung der Stichproben benutzen wir \texttt{fbm \footnote{https://pypi.org/project/fbm/}} und für die grundlegende Berechnung und die Speicherung von Daten \texttt{numpy \footnote{https://pypi.org/project/numpy/}}.
-      \hfill\break
-      Sei $x_1,\ldots,x_M \in \mathbb{R}^{d \times K}$ die generierte Stichproben mit der Dimension $d$ und der Anzahl an diskrete Zeitpunkte $K$. Die Stichproben werden stets mit der Dimension $d=1$ und $K=100$ generiert. Man beachte, dass wir für unsere Berechnung den erweiterten Prozess betrachten, d.h. $\hat{X}_t = (t,X_t)$. Dann ist die Datenmatrix gegeben durch
-      $\mathbb{D} = [x_1^T,\ldots,x_M^T] \in \mathbb{R}^{K \times M \times ({d+1}})$. Der Zeithorizont ist bei uns in beiden Methoden $T=1$. Für die Berechnung der Signatur verwenden wir \texttt{iisignature \footnote{https://pypi.org/project/iisignature/}}. Das Niveau für die geschnittete Signatur setzen wir in beiden Fällen auf $N=8$. Zusätzlich haben wir in den Graphen wegen der kleinen Datenmengen die Trendlinie gezeichnet, welche durch Interpolation von Polynomen $3.$ Grades erzeugt wurde, um den Verlauf beider Messungen mit dem Graphen in Fig: (\ref{fig: becker_expec_vs_hurst}) besser vergleichen zu können.
-      \hfill\break
-      In den Beispielen (\ref{rough_path: brownian_motion}) und (\ref{rough_path: fbm}) haben wir gezeigt, dass die Brownsche Bewegung und die fraktionale Brownsche Bewegung zu Rough Path erweitert werden. Sowohl für die Brownsche Bewegung als auch für die fraktionale Brownsche Bewegung können wir die Theorie der Rough Paths bis hinzu die Resultate für die Signaturen Stoppzeit verwenden.
-      \hfill\break
-      % Resultat aus der Signaturmethode
-      Wir nutzen für die Erstellung von Fig: (\ref{fig: signatur_methode}) für die Signaturmethode eine Trainingsstichprobengröße von $M_{train}=15'000$ und eine Teststichprobengröße von $M_{test}=5'000$. Weiterhin berechnen wir für $H \in \{0.02,0.03,\ldots,0.98,0.99\}$ jeweils den Wert für $\mathbb{E}[Y_{\tau}]$. Eine Darstellung findet man in Fig:
-      (\ref{fig: signatur_methode}).
-      \begin{figure}[H]
-        \caption{Signaturmethode}\label{fig: signatur_methode}
-        \centering
-        \includegraphics[width=\textwidth]{signatur_methode.png}
-        {\footnotesize
-        Für $H<1/2$ erkennen wir den ähnlichen Verlauf wie in Fig: (\ref{fig: becker_expec_vs_hurst}). Nur ist der maximaler Wert von der Signaturmethode bei 0.4 und der von Fig: (\ref{fig: becker_expec_vs_hurst}) bei 1.5 . Für $H=1/2$ liegt der Wert sowohl in der Signaturmethode als auch in Fig: (\ref{fig: becker_expec_vs_hurst}) bei 0, was auch mit der Theorie für das optimale Stoppen für Brownsche Bewegung übereinstimmt. Für $H>1/2$ erkennen wir den deutlichen Unterschied des Verlaufs beider Graphen. In der Signaturmethode liegen die Werte für den maximalen Erwartungswert bis $H<0.85$ in dem negativen Bereich, wohingegen der Wert in Fig: (\ref{fig: becker_expec_vs_hurst}) bis $H<1$ im positiven Bereich liegt und sogar eine monoton-wachsende Trend hat.
-        \par}
-      \end{figure}
+        % Hardware und Software
+        Für unsere Implementierung haben wir als Hardware das \textit{Raspberry Pi 4} mit 4 GB RAM und einem CPU mit 4 Cores verwendet. Die Entwicklungsumgebung ist das \textit{JupyterLab}. Das ist eine Erweiterung von Jupyter Notebook in Python, womit man zusätzliche IT-technische Einstellungen tätigen kann. Für die Generierung der Stichproben benutzen wir \texttt{fbm \footnote{https://pypi.org/project/fbm/}} und für die grundlegende Berechnung und die Speicherung von Daten \texttt{numpy \footnote{https://pypi.org/project/numpy/}}.
+        \hfill\break
+        Sei $x_1,\ldots,x_M \in \mathbb{R}^{d \times K}$ die generierte Stichproben mit der Dimension $d$ und der Anzahl an diskrete Zeitpunkte $K$. Die Stichproben werden stets mit der Dimension $d=1$ und $K=100$ generiert. Man beachte, dass wir für unsere Berechnung den erweiterten Prozess betrachten, d.h. $\hat{X}_t = (t,X_t)$. Dann ist die Datenmatrix gegeben durch
+        $\mathbb{D} = [x_1^T,\ldots,x_M^T] \in \mathbb{R}^{K \times M \times ({d+1}})$. Der Zeithorizont ist bei uns in beiden Methoden $T=1$. Für die Berechnung der Signatur verwenden wir \texttt{iisignature \footnote{https://pypi.org/project/iisignature/}}. Das Niveau für die geschnittete Signatur setzen wir in beiden Fällen auf $N=8$. Zusätzlich haben wir in den Graphen wegen der kleinen Datenmengen die Trendlinie gezeichnet, welche durch Interpolation von Polynomen $3.$ Grades erzeugt wurde, um den Verlauf beider Messungen mit dem Graphen in Fig: (\ref{fig: becker_expec_vs_hurst}) besser vergleichen zu können.
+        \hfill\break
+        In den Beispielen (\ref{rough_path: brownian_motion}) und (\ref{rough_path: fbm}) haben wir gezeigt, dass die Brownsche Bewegung und die fraktionale Brownsche Bewegung zu Rough Path erweitert werden. Sowohl für die Brownsche Bewegung als auch für die fraktionale Brownsche Bewegung können wir die Theorie der Rough Paths bis hinzu die Resultate für die Signaturen Stoppzeit verwenden.
+        \hfill\break
+        % Resultat aus der Signaturmethode
+        Wir nutzen für die Erstellung von Fig: (\ref{fig: signatur_methode}) für die Signaturmethode eine Trainingsstichprobengröße von $M_{train}=15'000$ und eine Teststichprobengröße von $M_{test}=5'000$. Weiterhin berechnen wir für $H \in \{0.02,0.03,\ldots,0.98,0.99\}$ jeweils den Wert für $\mathbb{E}[Y_{\tau}]$. Eine Darstellung findet man in Fig:
+        (\ref{fig: signatur_methode}).
+        \begin{figure}[H]
+          \caption{Signaturmethode}\label{fig: signatur_methode}
+          \centering
+          \includegraphics[width=\textwidth]{signatur_methode.png}
+          {\footnotesize
+          Für $H<1/2$ erkennen wir den ähnlichen Verlauf wie in Fig: (\ref{fig: becker_expec_vs_hurst}). Nur ist der maximaler Wert von der Signaturmethode bei 0.4 und der von Fig: (\ref{fig: becker_expec_vs_hurst}) bei 1.5 . Für $H=1/2$ liegt der Wert sowohl in der Signaturmethode als auch in Fig: (\ref{fig: becker_expec_vs_hurst}) bei 0, was auch mit der Theorie für das optimale Stoppen für Brownsche Bewegung übereinstimmt. Für $H>1/2$ erkennen wir den deutlichen Unterschied des Verlaufs beider Graphen. In der Signaturmethode liegen die Werte für den maximalen Erwartungswert bis $H<0.85$ in dem negativen Bereich, wohingegen der Wert in Fig: (\ref{fig: becker_expec_vs_hurst}) bis $H<1$ im positiven Bereich liegt und sogar eine monoton-wachsende Trend hat.
+          \par}
+        \end{figure}
 
-      % Resultat aus der Hybridmethode
-      \hfill\break
-      Für die Hybridmethode eine Trainingsstichprobengröße von $M_{train}=3'000$ und eine Teststichprobengröße von $M_{test}=500$. Der Grund für die kleine Datenmenge ist der hohe Rechenaufwand. Das werden wir im nächsten Abschnitt genauer diskutieren. Für die Erstellung des Graphen berechnen wir für $H \in \{0.05,0.1,0.15,\ldots,0.90,0.95\}$ jeweils den Wert für $\mathbb{E}[Y_{\tau}]$. Für die Adam Methode haben wir $r = 0.01, \beta_1 = 0.9, \beta_2 = 0.999$ und $\varepsilon = 10^{-8}$ gewählt. Eine Darstellung des Graphen findet man in Fig: (\ref{hybrid_method}).
-      \begin{figure}[H]\label{hybrid_method}
-        \caption[hybrid_method]{Hybridmethode}
-        \includegraphics[width=\textwidth]{hybrid_methode.png}
-        {\footnotesize
-        Hier erkennt man einen deutlich besseren Verlauf mit dem maximalen Wert $1.12$ für $\underset{\tau \in \mathcal{T}}{sup} \ \mathbb{E}[Y_{\tau}]$ in $H=0.05$. Auch der Verlauf für $H>1/2$ kommt dem vom Benchmark nah. In dem Punkt $H=1/2$ ist aber der Wert nicht bei 0.
-        \par}
-      \end{figure}
-      \newpage
+        % Resultat aus der Hybridmethode
+        \hfill\break
+        Für die Hybridmethode eine Trainingsstichprobengröße von $M_{train}=3'000$ und eine Teststichprobengröße von $M_{test}=500$. Der Grund für die kleine Datenmenge ist der hohe Rechenaufwand. Das werden wir im nächsten Abschnitt genauer diskutieren. Für die Erstellung des Graphen berechnen wir für $H \in \{0.05,0.1,0.15,\ldots,0.90,0.95\}$ jeweils den Wert für $\mathbb{E}[Y_{\tau}]$. Für die Adam Methode haben wir $r = 0.01, \beta_1 = 0.9, \beta_2 = 0.999$ und $\varepsilon = 10^{-8}$ gewählt. Eine Darstellung des Graphen findet man in Fig: (\ref{hybrid_method}).
+        \begin{figure}[H]\label{hybrid_method}
+          \caption[hybrid_method]{Hybridmethode}
+          \includegraphics[width=\textwidth]{hybrid_methode.png}
+          {\footnotesize
+          Hier erkennt man einen deutlich besseren Verlauf mit dem maximalen Wert $1.12$ für $\underset{\tau \in \mathcal{T}}{sup} \ \mathbb{E}[Y_{\tau}]$ in $H=0.05$. Auch der Verlauf für $H>1/2$ kommt dem vom Benchmark nah. In dem Punkt $H=1/2$ ist aber der Wert nicht bei 0.
+          \par}
+        \end{figure}
+        \newpage
 
       \subsection{Diskussionen}
-      Dadurch, dass die Berechnung der optimalen Lösung in der Signaturmethode durch das Lösen eines linearen Gleichungssystems mithilfe der Methode der kleinsten Quadrate erfolgt, haben wir die Möglichkeit, die Lösungstheorie aus der linearen Algebra anzuwenden, d.h. wir können die Parameter wie das Niveau der Signaturen $N$ und die Anzahl an Daten $M$ so anpassen, damit wir für die Datenmatrix der Signaturen den vollen Rang bekommen und somit die Eindeutigkeit der Lösung erhalten. Jedoch benötigen wir für die Analyse der Lösungsqualität von der Signaturmethode weitere Forschungsanalysen und theoretische Beweise. Darüber hinaus besitzt die optimale Lösung $\tau_{l^*}$ eine recht einfache Struktur dank der Einfachheit der Signaturmethode im Vergleich zu der Hybridmethode, da diese durch das Bestimmen einer Hyperebene $\langle l,\hat{\mathbb{X}}^{\leq N}_{0,t}\rangle = 1$ berechnet wird und damit die schöne Eigenschaft der Linearität besitzt. Zu guter Letzt ist der Trainingsaufwand von der Signaturmethode aufgrund der einfachen Struktur und Linearität wesentlich geringer als die von der Hybridmethode. Das ist ein klarer Vorteil, wenn wir mit größeren Datenmengen arbeiten. (siehe Vergleich der Rechenzeit Tabelle: \ref{tbl:vergleich_rechenzeit})
-      \hfill\break
-      Der fatale Nachteil der Signaturmethode ist die Präzision. Wir vermuten, dass es durch das Bestimmen der optimalen Lösung $l$ geschieht. Wir betrachten in der Signaturmethode für die Berechnung von $l$ alle Trainingsdaten und alle Zeitpunkte. Dadurch hat man ein globales $l$ für alle Zeitpunkte bestimmt und verliert dabei die lokale Präzision für $l$. Die dadurch berechnete Lösung weist eine große Abweichung von dem Benchmark Fig: (\ref{fig: becker_expec_vs_hurst}) auf. Wir sehen, dass unser maximaler Wert für den Erwartungswert bei $0.48$ für $H=0.02$ und der von Fig: (\ref{fig: becker_expec_vs_hurst}) bei $1.51$ für $H=0.01$. Wir sehen auch in der Trendlinie, dass zwar der Trend für
-      $H\leq1/2$ noch im Einklang mit dem Trend von Fig: (\ref{fig: becker_expec_vs_hurst}) ist, jedoch einen ganz anderen für $H>1/2$ aufweist. Zwar haben beide Graphen in $H=1/2$ den Wert $0$. Doch in der Signaturmethode erreichen wir den Tiefpunkt erst bei $H=0.74$ gemäß der Trendline oder $H=0.81$ gemäß des Graphen, wohingegen in $H=1/2$ der Benchmark seinen Tiefpunkt bereits erreicht hat.
-      \begin{table}[H]
-        \caption{Vergleich der durchschnittlichen Rechenzeit (gerundet)}
-        \centering
-        \begin{tabular}{rrr}
-          \midrule
-          M & Signaturmethode (Sekunden) & Hybridmethode (Sekunden) \\
-          \toprule
-          1000 & 8.99 & 9872.26 \\
-          5000 & 15.64 & 34883.11 \\
-          10000 & 48.32 & 78413.32 \\
-          \midrule
-        \end{tabular}
-        \label{tbl:vergleich_rechenzeit}
-      \end{table}
+        Dadurch, dass die Berechnung der optimalen Lösung in der Signaturmethode durch das Lösen eines linearen Gleichungssystems mithilfe der Methode der kleinsten Quadrate erfolgt, haben wir die Möglichkeit, die Lösungstheorie aus der linearen Algebra anzuwenden, d.h. wir können die Parameter wie das Niveau der Signaturen $N$ und die Anzahl an Daten $M$ so anpassen, damit wir für die Datenmatrix der Signaturen den vollen Rang bekommen und somit die Eindeutigkeit der Lösung erhalten. Jedoch benötigen wir für die Analyse der Lösungsqualität von der Signaturmethode weitere Forschungsanalysen und theoretische Beweise. Darüber hinaus besitzt die optimale Lösung $\tau_{l^*}$ eine recht einfache Struktur dank der Einfachheit der Signaturmethode im Vergleich zu der Hybridmethode, da diese durch das Bestimmen einer Hyperebene $\langle l,\hat{\mathbb{X}}^{\leq N}_{0,t}\rangle = 1$ berechnet wird und damit die schöne Eigenschaft der Linearität besitzt. Zu guter Letzt ist der Trainingsaufwand von der Signaturmethode aufgrund der einfachen Struktur und Linearität wesentlich geringer als die von der Hybridmethode. Das ist ein klarer Vorteil, wenn wir mit größeren Datenmengen arbeiten. (siehe Vergleich der Rechenzeit Tabelle: \ref{tbl:vergleich_rechenzeit})
+        \hfill\break
+        Der fatale Nachteil der Signaturmethode ist die Präzision. Wir vermuten, dass es durch das Bestimmen der optimalen Lösung $l$ geschieht. Wir betrachten in der Signaturmethode für die Berechnung von $l$ alle Trainingsdaten und alle Zeitpunkte. Dadurch hat man ein globales $l$ für alle Zeitpunkte bestimmt und verliert dabei die lokale Präzision für $l$. Die dadurch berechnete Lösung weist eine große Abweichung von dem Benchmark Fig: (\ref{fig: becker_expec_vs_hurst}) auf. Wir sehen, dass unser maximaler Wert für den Erwartungswert bei $0.48$ für $H=0.02$ und der von Fig: (\ref{fig: becker_expec_vs_hurst}) bei $1.51$ für $H=0.01$. Wir sehen auch in der Trendlinie, dass zwar der Trend für
+        $H\leq1/2$ noch im Einklang mit dem Trend von Fig: (\ref{fig: becker_expec_vs_hurst}) ist, jedoch einen ganz anderen für $H>1/2$ aufweist. Zwar haben beide Graphen in $H=1/2$ den Wert $0$. Doch in der Signaturmethode erreichen wir den Tiefpunkt erst bei $H=0.74$ gemäß der Trendline oder $H=0.81$ gemäß des Graphen, wohingegen in $H=1/2$ der Benchmark seinen Tiefpunkt bereits erreicht hat.
+        \begin{table}[H]
+          \caption{Vergleich der durchschnittlichen Rechenzeit (gerundet)}
+          \centering
+          \begin{tabular}{rrr}
+            \midrule
+            M & Signaturmethode (Sekunden) & Hybridmethode (Sekunden) \\
+            \toprule
+            1000 & 8.99 & 9872.26 \\
+            5000 & 15.64 & 34883.11 \\
+            10000 & 48.32 & 78413.32 \\
+            \midrule
+          \end{tabular}
+          \label{tbl:vergleich_rechenzeit}
+        \end{table}
 
-      \hfill\break
-      Einen klaren Nachteil hat auch die Hybridmethode. Die Trainingszeit ist vergleichweise sehr lang. Im Gegensatz zu der Signaturmethode, die den gesamten untersuchten Prozess vom Zeitpunkt $0$ bis zu $T$ betrachtet, berechnet die Hybridmethode den Prozess von $0$ bis zu den einzelnen diskreten Zeitpunkten $t_k \in (0,T)$ separat.
-      \hfill\break
-      Das führt dazu, dass der Rechenaufwand für die Monte-Carlo Approximation für den Erwartungswert durch die Anzahl der Schrittweite vervielfacht hat. Außerdem ist das Konvergenzverhalten von der Adam zwar besser als die konventionelle Gradient Descent Methode. Jedoch konvergiert Adam in manchen Fällen erst nach 50 Iterationen. Die genaue Messdaten für die Rechenzeit mit verschiedenen Datengrößen findet man in der Tabelle (\ref{tbl:vergleich_rechenzeit}).
-      \hfill\break
-      Jedoch hat die Hybridmethode einen klaren Vorteil gegenüber der Signaturmethode, nämlich die Präzision. Durch die Zerlegung der Stoppzeit in die lokalen Stoppentscheidungen in den einzelnen diskreten Zeitpunkten ermöglicht die Hybridmethode ein vergleichbares Resultat zu dem Benchmark. Wir sehen, dass der maximaler Wert für den Erwartungswert bei $1.1$ für $H=0.05$ liegt, wohin gegen der maximaler Wert vom Benchmark bei $1.51$ für $H=0.01$ ist. Außerdem können wir einen vergleichbaren Verlauf des Erwartungswerts bezüglich des Hurstparameters erkennen: den steilen Abstieg für $H<1/2$ und den milden Anstieg für $H>1/2$. Für $H=1/2$ liegt der Erwartungswert zwar nicht bei 0 und es existiert kleine Abweichungen bei der Messung. Jedoch sollten wir berücksichtigen, dass wir für unsere Messung wegen des hohen Rechenaufwands und der Einschränkung des Hardwares eine sehr kleine Stichprobengröße gewählt haben ($M_{train}=3000$) und die Anzahl an Testdaten ebenfalls ($M_{test} = 500$). Zusätzlich ist es zu erwähnen, dass die Hybridmethode durch die Kombination des Signaturansatzes und des Ansatzes für das tiefneuronale Netzwerk innovativ ist und eine neue Idee für die künftige Forschung liefern kann.
-      \hfill\break
-      Zusätzlich haben wir die relative Häufigkeit der berechneten Stoppzeit von beider Methoden für die Hurstparameter $H = \{0.05,0.1,0.15,\ldots,0.9,0.95\}$ gemessen. Als Beispiel betrachten wir die Messung für $H=0.8$ Fig: (\ref{verteilung_vergleich_0_8}). Weitere Graphiken findet man in Appendix \ref{appendix:plots}.
-      \hfill\break
-      Wir erkennen, dass die Signaturmethode dazu tendiert, direkt nach dem Starten des Prozesses zu stoppen, wohingegen die Hybridmethode dazu geneigt ist, zum Endzeitpunkt zu stoppen. Ein möglicher Grund für das Verhalten von der Hybridmethode kann ihre Konzeption sein. Wir initialisieren zum Zeitpunkt $T$ die lokale Stoppentscheidung mit $1$ und iterieren rückwärts, um die Stoppentscheidungen in den vorigen Zeitpunkten zu berechnen. Dabei haben wir für die Stoppentscheidung die Regel
-      $f_n^{l_n^*} := \mathds{1}_{ \{ \langle l_n^*, \hat{\mathbb{X}}^{< \infty}_{0,t_n}  \rangle \geq 1 \} }$ definiert. Das bedeutet, $f_n^{l_n^*}=1$ gilt genau dann, wenn die Bedingung $\langle l_n^*, \hat{\mathbb{X}}^{< \infty}_{0,t_n}  \rangle \geq 1$ erfüllt ist. In den Messungen ist es der Fall eingetreten, dass diese Bedingung für die meisten Pfade
-      $\langle l_n^*, \hat{\mathbb{X}}^{< \infty}_{0,t_n}  \rangle \geq 1$ nicht erfüllt ist und somit $f_n^{l_n^*}=0$ für alle $n<T$. Damit stoppt die durch die Hybridmethode bestimmte Stoppzeit die Testprozesse bei $T=1$.
-      \begin{figure}[H]
-        \caption{Vergleich der relativen Häufigkeit der Stoppzeiten für FBM in beider Methoden mit $H=0.8$}
-        \subfigure[Signaturmethode]{\includegraphics[width=.49\textwidth]{signatur/histogram_0_8.png}}
-        \subfigure[Hybridmethode]{\includegraphics[width=.49\textwidth]{hybrid/histogram_0_8.png}}
-        \label{verteilung_vergleich_0_8}
-      \end{figure}
-      \hfill\break
-      Zusammengefasst halten wir fest, dass die Signaturmethode durch ihre Linearität sehr kurze Rechenzeit hat und dadurch für die Verarbeitung von großen Mengen an Daten oder auch multi-dimensionalen Daten sehr gut geeignet ist. Jedoch wird sie erst Anwendung in der Praxis finden, wenn die Qualität der Approximation für die optimale Stoppzeit sich verbessert. Es gibt bislang keine wissenschaftliche Forschungsergebnisse für die Analyse der Qualität bezüglich des optimalen Stoppens mit der Signatur. Das bietet daher eine Grundlage für weitere Forschungsideen.
-      \hfill\break
-      Eine Möglichkeit zur Verbesserung der Optimierungsgeschwindigkeit oder auch -qualität in der Hybridmethode ist ein Vergleich der Gradientenverfahren angewandt auf unser Beispiel. Wir haben in dieser Arbeit Adam gewählt, da diese in jedem Schritt die Schätzung für den ersten und den zweiten Moment der Gradienten zur Rechnung gezogen hat und sich für die stochastische Optimierung in der Praxis als effizient herausgestellt hat. Als die Approximation für die Stoppentscheidung in der Hybridmethode haben wir die angepasste logistische Funktion (oder auch Sigmoidfunktion) $F(X)=\Phi(\langle l, X \rangle)$ ausgewählt. Das Phänomen verschwindente Gradienten (Vanishing Gradient) ist bei uns eingetreten. Das heißt, die Gradienten sind ab einem bestimmten Iterationsschritt dünnbesetzt und die gradientenbasierte Methode konvergiert ab dem Zeitpunkt sehr langsam. Aus der Praxis in der Anwendung von tief neuronalen Netzwerken hat sich herausgestellt, dass die logistische Regression das Phänomen verursacht und man entweder eine andere Aktivierungsfunktion oder eine andere Optimierungsmethode wählt. Es sollte daher in die Richtung geforscht werden, welche Optimierungsmethode für die Hybridmethode am besten geeignet ist. Kandidaten dafür sind zum Beispiel die ReLU Funktion oder auch die RelTan Funktion \cite{wang_reltanh_2019}.
-      \hfill\break
-      Zwar gibt es die Konvergenzanalyse von \cite{becker_deep_2019} für DNN. Aber die Konvergenz der Hybridmethode ist nicht untersucht. Desweiteren ist die Forschung über den Zusammenhang zwischen dem Niveau der Signatur und der Qualität des optimalen Stoppens erwünscht. Es ist intuitiv, dass je höher das Niveau ist, umso größer ist der Informationsgehalt von dem Pfad. Aber wir sollten bedenken, je höher das Niveau ist, umso mehr Rechenaufwand benötigt die Methode für die Bestimmung der optimalen Stoppzeit. Die Idee ist also, durch numerische Experimente das optimale Niveau $N^*$ zu finden, das eine gute Qualität für das Lösen vom optimalen Stoppen ohne enormen Rechenaufwand liefert.
-      \hfill\break
-      Da Rough Path eine mächtige Methode zur Untersuchung von stochastischen Prozessen ist und über die Einschränkungen wie die Markoveigenschaft oder auch die Martingaleigenschaft hinausgeht, kann man in die Richtung der Finanzmathematik untersuchen, wie die Qualität der beiden Methoden bei Optionsbepreisung ist. Ein Beispiel mit der amerikanische Put Option hat man bereits in \cite{bayer_optimal_2020} mit der Deep Signatur Methode untersucht.
+        \hfill\break
+        Einen klaren Nachteil hat auch die Hybridmethode. Die Trainingszeit ist vergleichweise sehr lang. Im Gegensatz zu der Signaturmethode, die den gesamten untersuchten Prozess vom Zeitpunkt $0$ bis zu $T$ betrachtet, berechnet die Hybridmethode den Prozess von $0$ bis zu den einzelnen diskreten Zeitpunkten $t_k \in (0,T)$ separat.
+        \hfill\break
+        Das führt dazu, dass der Rechenaufwand für die Monte-Carlo Approximation für den Erwartungswert durch die Anzahl der Schrittweite vervielfacht hat. Außerdem ist das Konvergenzverhalten von der Adam zwar besser als die konventionelle Gradient Descent Methode. Jedoch konvergiert Adam in manchen Fällen erst nach 50 Iterationen. Die genaue Messdaten für die Rechenzeit mit verschiedenen Datengrößen findet man in der Tabelle (\ref{tbl:vergleich_rechenzeit}).
+        \hfill\break
+        Jedoch hat die Hybridmethode einen klaren Vorteil gegenüber der Signaturmethode, nämlich die Präzision. Durch die Zerlegung der Stoppzeit in die lokalen Stoppentscheidungen in den einzelnen diskreten Zeitpunkten ermöglicht die Hybridmethode ein vergleichbares Resultat zu dem Benchmark. Wir sehen, dass der maximaler Wert für den Erwartungswert bei $1.1$ für $H=0.05$ liegt, wohin gegen der maximaler Wert vom Benchmark bei $1.51$ für $H=0.01$ ist. Außerdem können wir einen vergleichbaren Verlauf des Erwartungswerts bezüglich des Hurstparameters erkennen: den steilen Abstieg für $H<1/2$ und den milden Anstieg für $H>1/2$. Für $H=1/2$ liegt der Erwartungswert zwar nicht bei 0 und es existiert kleine Abweichungen bei der Messung. Jedoch sollten wir berücksichtigen, dass wir für unsere Messung wegen des hohen Rechenaufwands und der Einschränkung des Hardwares eine sehr kleine Stichprobengröße gewählt haben ($M_{train}=3000$) und die Anzahl an Testdaten ebenfalls ($M_{test} = 500$). Zusätzlich ist es zu erwähnen, dass die Hybridmethode durch die Kombination des Signaturansatzes und des Ansatzes für das tiefneuronale Netzwerk innovativ ist und eine neue Idee für die künftige Forschung liefern kann.
+        \hfill\break
+        Zusätzlich haben wir die relative Häufigkeit der berechneten Stoppzeit von beider Methoden für die Hurstparameter $H = \{0.05,0.1,0.15,\ldots,0.9,0.95\}$ gemessen. Als Beispiel betrachten wir die Messung für $H=0.8$ Fig: (\ref{verteilung_vergleich_0_8}). Weitere Graphiken findet man in Appendix \ref{appendix:plots}.
+        \hfill\break
+        Wir erkennen, dass die Signaturmethode dazu tendiert, direkt nach dem Starten des Prozesses zu stoppen, wohingegen die Hybridmethode dazu geneigt ist, zum Endzeitpunkt zu stoppen. Ein möglicher Grund für das Verhalten von der Hybridmethode kann ihre Konzeption sein. Wir initialisieren zum Zeitpunkt $T$ die lokale Stoppentscheidung mit $1$ und iterieren rückwärts, um die Stoppentscheidungen in den vorigen Zeitpunkten zu berechnen. Dabei haben wir für die Stoppentscheidung die Regel
+        $f_n^{l_n^*} := \mathds{1}_{ \{ \langle l_n^*, \hat{\mathbb{X}}^{< \infty}_{0,t_n}  \rangle \geq 1 \} }$ definiert. Das bedeutet, $f_n^{l_n^*}=1$ gilt genau dann, wenn die Bedingung $\langle l_n^*, \hat{\mathbb{X}}^{< \infty}_{0,t_n}  \rangle \geq 1$ erfüllt ist. In den Messungen ist es der Fall eingetreten, dass diese Bedingung für die meisten Pfade
+        $\langle l_n^*, \hat{\mathbb{X}}^{< \infty}_{0,t_n}  \rangle \geq 1$ nicht erfüllt ist und somit $f_n^{l_n^*}=0$ für alle $n<T$. Damit stoppt die durch die Hybridmethode bestimmte Stoppzeit die Testprozesse bei $T=1$.
+        \begin{figure}[H]
+          \caption{Vergleich der relativen Häufigkeit der Stoppzeiten für FBM in beider Methoden mit $H=0.8$}
+          \subfigure[Signaturmethode]{\includegraphics[width=.49\textwidth]{signatur/histogram_0_8.png}}
+          \subfigure[Hybridmethode]{\includegraphics[width=.49\textwidth]{hybrid/histogram_0_8.png}}
+          \label{verteilung_vergleich_0_8}
+        \end{figure}
+        \hfill\break
+        Zusammengefasst halten wir fest, dass die Signaturmethode durch ihre Linearität sehr kurze Rechenzeit hat und dadurch für die Verarbeitung von großen Mengen an Daten oder auch multi-dimensionalen Daten sehr gut geeignet ist. Jedoch wird sie erst Anwendung in der Praxis finden, wenn die Qualität der Approximation für die optimale Stoppzeit sich verbessert. Es gibt bislang keine wissenschaftliche Forschungsergebnisse für die Analyse der Qualität bezüglich des optimalen Stoppens mit der Signatur. Das bietet daher eine Grundlage für weitere Forschungsideen.
+        \hfill\break
+        Eine Möglichkeit zur Verbesserung der Optimierungsgeschwindigkeit oder auch -qualität in der Hybridmethode ist ein Vergleich der Gradientenverfahren angewandt auf unser Beispiel. Wir haben in dieser Arbeit Adam gewählt, da diese in jedem Schritt die Schätzung für den ersten und den zweiten Moment der Gradienten zur Rechnung gezogen hat und sich für die stochastische Optimierung in der Praxis als effizient herausgestellt hat. Als die Approximation für die Stoppentscheidung in der Hybridmethode haben wir die angepasste logistische Funktion (oder auch Sigmoidfunktion) $F(X)=\Phi(\langle l, X \rangle)$ ausgewählt. Das Phänomen verschwindente Gradienten (Vanishing Gradient) ist bei uns eingetreten. Das heißt, die Gradienten sind ab einem bestimmten Iterationsschritt dünnbesetzt und die gradientenbasierte Methode konvergiert ab dem Zeitpunkt sehr langsam. Aus der Praxis in der Anwendung von tief neuronalen Netzwerken hat sich herausgestellt, dass die logistische Regression das Phänomen verursacht und man entweder eine andere Aktivierungsfunktion oder eine andere Optimierungsmethode wählt. Es sollte daher in die Richtung geforscht werden, welche Optimierungsmethode für die Hybridmethode am besten geeignet ist. Kandidaten dafür sind zum Beispiel die ReLU Funktion oder auch die RelTan Funktion \cite{wang_reltanh_2019}.
+        \hfill\break
+        Zwar gibt es die Konvergenzanalyse von \cite{becker_deep_2019} für DNN. Aber die Konvergenz der Hybridmethode ist nicht untersucht. Desweiteren ist die Forschung über den Zusammenhang zwischen dem Niveau der Signatur und der Qualität des optimalen Stoppens erwünscht. Es ist intuitiv, dass je höher das Niveau ist, umso größer ist der Informationsgehalt von dem Pfad. Aber wir sollten bedenken, je höher das Niveau ist, umso mehr Rechenaufwand benötigt die Methode für die Bestimmung der optimalen Stoppzeit. Die Idee ist also, durch numerische Experimente das optimale Niveau $N^*$ zu finden, das eine gute Qualität für das Lösen vom optimalen Stoppen ohne enormen Rechenaufwand liefert.
+        \hfill\break
+        Da Rough Path eine mächtige Methode zur Untersuchung von stochastischen Prozessen ist und über die Einschränkungen wie die Markoveigenschaft oder auch die Martingaleigenschaft hinausgeht, kann man in die Richtung der Finanzmathematik untersuchen, wie die Qualität der beiden Methoden bei Optionsbepreisung ist. Ein Beispiel mit der amerikanische Put Option hat man bereits in \cite{bayer_optimal_2020} mit der Deep Signatur Methode untersucht.
 
-      \newpage
+        \newpage
 
     \section{Fazit}
       % Optimal Stopping mit Rough Path
@@ -1262,7 +1263,7 @@ tmargin={4cm},bmargin = {3cm}]{geometry}
       \end{align*}
       anstatt ein tief neuronales Netzwerk wie in \cite{becker_deep_2019}.
       \hfill\break
-      Die numerische Resultate aus \cite{becker_deep_2019} dienen als der Benchmark für unsere Methode. Verglichen werden die berechnete Werte für $\mathbb{E}[Y_{\tau^* \wedge T}]$ mit den jeweiligen bestimmten optimalen Stoppzeiten $\tau^*$. Die Resultate aus den numerischen Experimenten zeigen, dass qualitativ die Hybridmethode deutlich überragener ist. Aber die Laufzeitperformence ist im Vergleich zu der Signaturmethode deutlich schlechter. Jedoch schränkt unser Hardware uns bei der Performance stark ein, was definitiv einen Einfluss auf die Laufzeit hat.
+      Die numerische Resultate aus \cite{becker_deep_2019} dienen als der Benchmark für unsere Methode. Verglichen werden die berechnete Werte für $\mathbb{E}[Y_{\tau^* \wedge T}]$ mit den jeweiligen Erwartungswerten $sup \ \mathbb{E}[Y_{\tau \wedge T}]$, welche jeweils durch die optimalen Stoppzeiten $\tau^*$ aus beider Methoden berechnet sind. Die Resultate aus den numerischen Experimenten zeigen, dass qualitativ die Hybridmethode deutlich überragener ist. Aber die Laufzeitperformence ist im Vergleich zu der Signaturmethode deutlich schlechter. Jedoch schränkt unser Hardware uns bei der Performance stark ein, was definitiv einen Einfluss auf die Laufzeit hat. Durch diese Einschränkung ist zusätzlich die verwendeten Datenmenge sehr klein, so dass im Sinne des Gesetzes der großen Zahlen eine gute Approximation nicht möglich ist.
       \hfill\break
       Zwar ist die Optimalität der Stoppzeit in der Hybridmethode durch Lemma (\ref{lemma: bayer_st_theta}) gewährleistet. Jedoch haben wir die Konvergenzanalyse für das Funktional in (\ref{eqn: l_n}) in dieser Arbeit nicht diskutiert. Im Hinblick darauf kann es sinnvoll sein, theoretische Beweise dafür zu erforschen. Weiterführende Forschung könnte die Verbesserung der Rechenzeit für die Hybridmethode aus einer neuen Perspektive betrachten. Wenn der Rechenaufwand sich dadurch reduziert hat, könnte die zukünftige Forschung an weitere Anwendungsfälle knüpfen, indem man z.B. diese Methode für die Bepreisung von Optionen wie die American Put Option oder die Bermudan-Max-Call Option einsetzt.
     \printbibliography
